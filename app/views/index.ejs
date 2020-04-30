@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Of Everything</title>
+</head>
+
+<body class="container">
+
+    <header>
+        <nav class="navbar fixed-top navbar-light bg-light rounded">
+            <div class="header">
+                <a class="navbar-brand" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                    <img src="images/logo.png" width="40" height="40"
+                        class="d-inline-block align-top" alt="">
+                    List of Everything
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal para adicionar item -->
+    <form action="/cadastrartask" method="POST">
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Adicione um Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="nome" name="nome" cols="30" rows="2" class="form-control mb-2" placeholder="Item da lista"></textarea>
+                    <input id="quantidade" name="quantidade" type="number" class="form-control" placeholder="Quantidade">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-dark">Salvar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Lista de tarefas a fazer -->
+    <article class="article-tasks-list">
+
+        <p class="article-tasks-list-title">Aqui sua lista de tarefas...resolva</p>
+
+        <table class="table rounded">
+            <tbody>
+                <% if(tasks.length > 0 && notSolved == true) { %>
+                    <% for(var i = 0; i < tasks.length; i++) { %>
+                        <% if(tasks[i].status == 'Em Andamento') { %>
+                            <tr>
+                                <th><a href="/solvedTask?id_solved_task=<%=i%>"><img src="images/ok.png" width="40" height="40" alt=""></a></th>
+                                <td class="col-9">[<%=tasks[i].quantidade%>] - <%=tasks[i].nome%></td>
+                                <td class="col-1"><a href="/removerTask?id_task=<%=i%>" class="btn btn-secondary btn-sm btn-block">Excluir</a></td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                <% } else { %>
+                    <div class="centralized-text">
+                        <p>Sua lista está vazia :-( Deseja criar uma nova lista?</p>
+                        <p><a href="/newList" class="btn btn-outline-dark btn-sm"> Clique aqui!</a></p>
+                    </div>
+                <% } %>
+            </tbody>
+        </table>
+    </article>
+
+    <!-- Lista de tarefas resolvidas -->
+    <article class="article-tasks-list-solved">
+        <div role="separator" class="dropdown-divider"></div>
+
+        <p class="article-tasks-list-solved-title">E aqui sua lista resolvida...não fez mais que a
+            obrigação</p>
+
+        <table class="table table-sm table-dark rounded table-solved">
+            <tbody>
+                <% if(tasks.length > 0) { %>
+                    <% for(var i = 0; i < tasks.length; i++) { %>
+                        <% if(tasks[i].status == 'Concluido') { %>
+                            <tr>
+                                <td>[<%=tasks[i].quantidade%>] - <%=tasks[i].nome%></td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                <% } else { %>
+                    <div class="centralized-text">
+                        <p>Resolva algo para aparecer aqui!</p>
+                    </div>
+                <% } %>
+            </tbody>
+        </table>
+    </article>
+
+    <footer>
+        <nav class="navbar fixed-bottom navbar-light bg-light rounded">
+            <div class="footer-content">
+                <a class="navbar-brand">
+                    © Copyright 2020 - All Rights Reserved
+                </a>
+            </div>
+        </nav>
+    </footer>
+</body>
+
+</html>

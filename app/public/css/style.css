@@ -1,0 +1,40 @@
+.header {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.article-tasks-list {
+    margin-top: 100px;
+}
+
+.article-tasks-list-title {
+    margin-bottom: 2%;
+    font-weight: bolder;
+}
+
+.article-tasks-list-solved {
+    margin-bottom: 50px;
+}
+
+.article-tasks-list-solved-title {
+    margin-top: 3%; 
+    margin-bottom: 2%; 
+    font-weight: bolder;
+}
+
+.table-solved {
+    margin-bottom: 10%;
+}
+
+.centralized-text {
+    text-align: center;
+}
+
+.footer-content {
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.footer-content a {
+    font-size: small;
+}    
