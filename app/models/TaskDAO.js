@@ -18,10 +18,6 @@ class TaskDAO {
         return this.tasks;
     }
 
-    updateTask(task) {
-        return;
-    }
-
     removeTask(task) {
         this.tasks.splice(task, 1);
         return this.tasks;
